@@ -4,6 +4,7 @@ import ChatBot from 'react-simple-chatbot';
 import Title from './components/ChatFeed';
 import MessageList from "./components/messageList"
 import SendMessageForm from "./components/MessageFrom"
+import MessageForm from './components/MessageFrom';
 // import {Segment} from 'semantic-ui-react';
 // import {Segment} from 'semantic-ui-css/semantic.min.css';
 
@@ -32,7 +33,7 @@ class App extends React.Component{
         <div className='chat-app-wrap'>
             <Title/>
             <MessageList messages={this.state.messages}/>
-            <SendMessageForm/>
+            <MessageForm/>
         </div>
       </div>
     )
