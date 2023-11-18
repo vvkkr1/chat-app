@@ -1,9 +1,11 @@
 import React from 'react';
+import {ChatEngine} from 'react-chat-engine';
+import ChatFeed from './components/ChatFeed';
+// import LoginForm from ""
 import './App.css';
-import ChatBot from 'react-simple-chatbot';
-import Title from './components/ChatFeed';
+// import Title from './components/ChatFeed';
 import MessageList from "./components/messageList"
-import SendMessageForm from "./components/MessageFrom"
+// import SendMessageForm from "./components/MessageFrom"
 import MessageForm from './components/MessageFrom';
 // import {Segment} from 'semantic-ui-react';
 // import {Segment} from 'semantic-ui-css/semantic.min.css';
@@ -19,87 +21,23 @@ const data = [
   }
 ]
 
-class App extends React.Component{
-  constructor(){
-    super();
-    this.state = {
-      messages:data
-    }
-  }
+const projectID = '1b7801d6-8a66-4be4-a442-89219d833dfc';
 
-  render(){
+  const App = () => {
+    if(!localStorage.getItem('username')) 
+    // return <LoginForm/>
     return(
       <div className='App'>
-        <div className='chat-app-wrap'>
-            <Title/>
-            <MessageList messages={this.state.messages}/>
-            <MessageForm/>
-        </div>
+        <ChatEngine
+          height="100vh"
+          projectID={projectID}
+          userName={localStorage.getItem('username')}
+          userSecret={localStorage.getItem('password')}
+          renderChatFeed={(chatAppProps)=><ChatFeed {...chatAppProps}/>}
+          onNewMessage={()=> new Audio('https://chat-engine-assets.s3.amazonaws.com/click.mp3').play()}
+        />
       </div>
     )
-  }
+  
 }
 export default App;
-
-// function App() {
-//   const steps = [
-//     {
-//       id:"Great",
-//       message:"Hello, Welcome to our chat application",
-//       trigger: "Ask Name"
-//     },
-//     {
-//       id:"Ask Name",
-//       message:"Please enter your name",
-//       trigger:"waiting for your response"
-//     },
-//     {
-//       id:"waiting",
-//       user:true,
-//       trigger:"Name"
-//     },
-//     {
-//       id:"Name",
-//       message:"Hi {previousValue}, your issues",
-//       trigger:"issues"
-//     },
-//     {
-//       id:"issues",
-//       options:[
-//         {
-//           value:'React',
-//           label:"React",
-//           trigger:"React"
-//         },
-//         {
-//           value:'Vue',
-//           label:"Vue",
-//           trigger:"Vue"
-//         }
-//       ]
-//     },
-//     {
-//       id:"React",
-//       message:"Thanks for telling your react issue",
-//       end:true
-//     },
-//     {
-//       id:"Angular",
-//       message:"Thanks for telling your angular issues",
-//       end:true
-//     }
-//   ]
-
-//   return (
-//     <div className="App">
-//       <h1>Hello chat app</h1>
-//       <div className='chat-app-wrap'>
-//           <Title/>
-//           <MessageList/>
-//           <SendMessageForm/>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default App;
