@@ -1,8 +1,8 @@
 import React from 'react'
-import './title.css';
-import SendMessageForm from '../MessageFrom';
+import './chatFeed.css';
 import MessageForm from '../MessageFrom';
-// import TheirMessage from 
+import TheirMessage from '../TheirMessage';
+import MyMessage from '../MyMessage';
 
 const ChatFeed = (props) => {
   const {chats, activeChat,userName,messages}=props
@@ -29,11 +29,9 @@ const ChatFeed = (props) => {
           <div className='message-block'>
               {isMyMessage 
                  ?
-                 <h1>hello msg</h1> 
-                //  <MyMessage message={message}/>
+                 <MyMessage message={message}/>
                 : 
-                <h2>your msg</h2>
-                // <TheirMessage message={message} lastMessage={message[lastMessageKey]}/>
+                <TheirMessage message={message} lastMessage={message[lastMessageKey]}/>
                 }
           </div>
           <div className='read-receipt' style={{marginRight:isMyMessage ? "18px" :"0px",marginLeft: isMyMessage ? "0px" : "68px"}}>
