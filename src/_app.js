@@ -3,12 +3,14 @@ import React from 'react';
 import Register from './pages/Register';
 // style 
 import './styles.scss';
+import Login from './pages/Login';
+import Home from './pages/Home';
 
 function HomeApp(){
     return(
         // parent component
         <div>
-            <Register/>
+            <Home/>
         </div>
     )
 }
