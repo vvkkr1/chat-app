@@ -1,11 +1,14 @@
 import React from 'react';
-import Homepage from './pages';
+// import Homepage from './pages';
+import Register from './pages/Register';
+// style 
+import './styles.scss';
 
 function HomeApp(){
     return(
+        // parent component
         <div>
-            {/* This is Parent page */}
-            <Homepage/>
+            <Register/>
         </div>
     )
 }
