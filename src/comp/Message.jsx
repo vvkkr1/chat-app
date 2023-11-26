@@ -2,7 +2,18 @@ import React from 'react'
 
 const Message = () => {
   return (
-    <div>Message</div>
+    <div className='message'>
+       <div className="message-container">
+          <div className="message-info">
+            <img src="https://images.pexels.com/photos/1642228/pexels-photo-1642228.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" />
+            <span>just now</span>
+          </div>
+          <div className="message-content">
+            <p>hello</p>
+            {/* <img src="https://images.pexels.com/photos/1642228/pexels-photo-1642228.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" /> */}
+          </div>
+       </div>
+    </div>
   )
 }
 
