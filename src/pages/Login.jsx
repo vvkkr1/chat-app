@@ -1,5 +1,5 @@
 import React from 'react'
-import Add from '../img/addAvatar.png'
+// import Add from '../img/addAvatar.png'
 function Login(){
   return (
     <div className='form-container'>

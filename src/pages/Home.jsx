@@ -1,13 +1,17 @@
 import React from 'react'
+import Sidebar from '../comp/Sidebar'
+import ChatSidebar from '../comp/ChatSidebar'
 
-function Home() {
+
+function Homepage() {
   return (
-    <div className='home'>
-        <div className="container">
-            
+    <div className='homepage'>
+        <div className="homepage-container">
+            <Sidebar/>
+            <ChatSidebar/>
         </div>
     </div>
   )
 }
 
-export default Home
+export default Homepage
