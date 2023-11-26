@@ -23,7 +23,7 @@
             color:#5d5b8d;
             font-size: 14px;
         }
-
+        
         form{
             display: flex;
             flex-direction: column;
@@ -66,7 +66,6 @@
         }
     }
 }
-
 .homepage{
     background-color: #a7bcff;
     height: 100vh;
@@ -93,7 +92,6 @@
                 .navbar{
 
                     .navbar-container{
-
                         display: flex;
                         align-items: center;
                         background-color: #2f2d52;
@@ -128,6 +126,7 @@
                 }
             }
         }
+
         .chat-sidebar{
             flex: 2;
         }
