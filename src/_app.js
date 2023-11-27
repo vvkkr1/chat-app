@@ -5,12 +5,14 @@ import React from 'react';
 import './styles.scss';
 // import Login from './pages/Login';
 import Homepage from './pages/Home';
+import Register from './pages/Register';
 
 function HomeApp(){
     return(
         // parent component
         <div>
-            <Homepage/>
+            <Register/>
+            {/* <Homepage/> */}
         </div>
     )
 }
