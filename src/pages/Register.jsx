@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Add from '../img/addAvatar.png'
 // import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import {createUserWithEmailAndPassword} from "firebase/auth";
-import {auth} from "../firebase/firebase";
+import {createUserWithEmailAndPassword,updateProfile} from "firebase/auth";
+import {auth,storage} from "../firebase/firebase";
+
+import {ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
+import { doc, setDoc } from "firebase/firestore"; 
+import {db} from "../firebase/firebase"
+
 
 function Register(){
-  
+
+  const[err,setErr]=useState(false)
+
   async function handleSubmit(e){
     //to overcome refresh
     e.preventDefault();
@@ -21,10 +29,45 @@ function Register(){
     //here is the main part
       // const auth = getAuth();
       try{
-        const res = await createUserWithEmailAndPassword(auth, email, password);
-        console.log(res)
-      }
+            const res = await createUserWithEmailAndPassword(auth, email, password);
+            console.log(res)
+
+
+        //image upload logic in then
+
+            // const storage = getStorage();
+            const storageRef = ref(storage, 'images/rivers.jpg');
+
+            const uploadTask = uploadBytesResumable(storageRef, file);
+
+            uploadTask.on(
+              (error) => {
+                setErr(true)
+                // Handle unsuccessful uploads
+              }, 
+              () => {
+                // Handle successful uploads on complete
+                getDownloadURL(uploadTask.snapshot.ref).then(async function (downloadURL) {
+                  // console.log('File available at', downloadURL);
+                  await updateProfile(res.user,{
+                    displayName:displayName,
+                    photoURL:downloadURL
+                  });
+                  
+                  await setDoc(doc(db,"users",res.user.uid),{
+                    uid:res.user.id,
+                    displayName,
+                    email,
+                    photoURL:downloadURL
+                  })
+                });
+              }
+            );
+      }   
+
+
       catch(error){
+        setErr(true);
         console.log("Error!!!",error)
       }
         // .then((userCredential) => {
@@ -55,8 +98,9 @@ function Register(){
               <span>Add an avatar</span>
             </label>
             <button>Sign up</button>
+            {err && <span>Something went wrong!!!!!</span>}
         </form>
-        <p>You do have an ccount? Login</p>
+        <p>You do have an account? Login</p>
       </div>
     </div>
   )
