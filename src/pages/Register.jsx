@@ -13,8 +13,8 @@ import { useNavigate, Link } from 'react-router-dom';
 
 function Register(){
 
-  const[err,setErr]=useState(false)
-  const navigate=useNavigate();
+  const[err,setErr] = useState(false)
+  const navigate = useNavigate();
 
 
   async function handleSubmit(e){
@@ -33,14 +33,12 @@ function Register(){
       // const auth = getAuth();
 
 
-
-
       try{
             // const {user} = await createUserWithEmailAndPassword(auth, email, password);
 
             // console.log(user)
 
-        //image upload logic in then
+            //image upload logic in then
 
             // const storage = getStorage();
 
@@ -83,6 +81,7 @@ function Register(){
             })
 
       }  
+
       catch(error){
         setErr(true);
         // console.log("Error!!!",error)

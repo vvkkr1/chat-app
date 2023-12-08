@@ -7,9 +7,8 @@ import { auth } from '../firebase/firebase';
 
 function Login(){
 
-  const[err, setErr]=useState(false);
-  const navigate=useNavigate();
-
+  const [err, setErr] = useState(false);
+  const navigate = useNavigate();
 
     async function handleSubmit(e){
     //to overcome refresh
