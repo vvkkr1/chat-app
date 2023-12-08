@@ -8,12 +8,13 @@ import {ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 import { doc, setDoc } from "firebase/firestore"; 
 import {db} from "../firebase/firebase"
+import { useNavigate } from 'react-router-dom';
 
 
 function Register(){
 
   const[err,setErr]=useState(false)
-
+  const navigate=useNavigate();
 
 
   async function handleSubmit(e){
@@ -66,12 +67,13 @@ function Register(){
                     // onAuthStateChanged();
                     // const docRef = doc(db, 'userData', user.uid)
 
-                     await setDoc(doc(db, 'userData', user.uid),{
+                    await setDoc(doc(db, 'userData', user.uid),{
                       uid: user.id || null,
                       displayName,
                       email,
                       photoURL:downloadURL
-                    }) 
+                    })
+                    navigate("/");
                   });
                 }
               );
