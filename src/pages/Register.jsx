@@ -14,6 +14,8 @@ function Register(){
 
   const[err,setErr]=useState(false)
 
+
+
   async function handleSubmit(e){
     //to overcome refresh
     e.preventDefault();
@@ -28,60 +30,64 @@ function Register(){
 //Promises used here
     //here is the main part
       // const auth = getAuth();
-      try{
-            const res = await createUserWithEmailAndPassword(auth, email, password);
-            console.log(res)
 
+
+
+
+      try{
+            // const {user} = await createUserWithEmailAndPassword(auth, email, password);
+
+            // console.log(user)
 
         //image upload logic in then
 
             // const storage = getStorage();
-            const storageRef = ref(storage, 'images/rivers.jpg');
 
-            const uploadTask = uploadBytesResumable(storageRef, file);
+            await createUserWithEmailAndPassword(auth, email, password).then(async(userRec)=>{
+              const user=userRec.user;
+              
+              const storageRef = ref(storage, 'images/rivers.jpg');
 
-            uploadTask.on(
-              (error) => {
-                setErr(true)
-                // Handle unsuccessful uploads
-              }, 
-              () => {
-                // Handle successful uploads on complete
-                getDownloadURL(uploadTask.snapshot.ref).then(async function (downloadURL) {
-                  // console.log('File available at', downloadURL);
-                  await updateProfile(res.user,{
-                    displayName:displayName,
-                    photoURL:downloadURL
+              const uploadTask = uploadBytesResumable(storageRef, file);
+  
+              uploadTask.on(
+                (error) => {
+                  setErr(true)
+                  // Handle unsuccessful uploads
+                }, 
+                () => {
+                  // Handle successful uploads on complete
+                  getDownloadURL(uploadTask.snapshot.ref).then(async function (downloadURL) {
+                    // console.log('File available at', downloadURL);
+                    await updateProfile(user,{
+                      displayName,
+                      photoURL:downloadURL
+                    });
+                    // onAuthStateChanged();
+                    // const docRef = doc(db, 'userData', user.uid)
+
+                     await setDoc(doc(db, 'userData', user.uid),{
+                      uid: user.id || null,
+                      displayName,
+                      email,
+                      photoURL:downloadURL
+                    }) 
                   });
-                  
-                  await setDoc(doc(db,"users",res.user.uid),{
-                    uid:res.user.id,
-                    displayName,
-                    email,
-                    photoURL:downloadURL
-                  })
-                });
-              }
-            );
-      }   
+                }
+              );
+            }).catch((error)=>{
+              console.log("error_______________")
+            })
 
-
+      }  
       catch(error){
         setErr(true);
-        console.log("Error!!!",error)
+        // console.log("Error!!!",error)
+        console.log("________________________",error)
       }
-        // .then((userCredential) => {
-        //   // Signed up 
-        //   const user = userCredential.user;
-        //   console.log("__________",user)
-        //   // ...
-        // })
-        // .catch((error) => {
-        //   const errorCode = error.code;
-        //   const errorMessage = error.message;
-        //   // ..
-        // });
+        console.log(email);
   }
+  
 
   return (
     <div className='form-container'>
