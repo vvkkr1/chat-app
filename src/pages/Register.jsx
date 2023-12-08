@@ -8,7 +8,7 @@ import {ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 import { doc, setDoc } from "firebase/firestore"; 
 import {db} from "../firebase/firebase"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 
 function Register(){
@@ -73,6 +73,7 @@ function Register(){
                       email,
                       photoURL:downloadURL
                     })
+                    // await setDoc(doc(db,"userChats",user.id),{});
                     navigate("/");
                   });
                 }
@@ -108,7 +109,7 @@ function Register(){
             <button>Sign up</button>
             {err && <span>Something went wrong!!!!!</span>}
         </form>
-        <p>You do have an account? Login</p>
+        <p>You do have an account? <Link to="/login">Login</Link></p>
       </div>
     </div>
   )

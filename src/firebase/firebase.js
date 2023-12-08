@@ -25,5 +25,5 @@ const firebaseConfig = {
  const db = getFirestore();
 //  const users=collection(db,"users");
 
- export {app,auth,storage,db}
+ export {app, auth, storage, db}
 
