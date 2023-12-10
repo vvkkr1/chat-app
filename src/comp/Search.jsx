@@ -30,7 +30,6 @@ const Search = () => {
     e.code === "Enter" && handleSearch();
   }
 
-
   return (
     <div className='search'>
       <div className='search-container'>
@@ -42,7 +41,7 @@ const Search = () => {
           {user && <div className="user-chats">
             {/* <img src="https://images.pexels.com/photos/13484361/pexels-photo-13484361.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" /> */}
             <img src={user.photoURL} alt="" />
-            <div className="user-chat-info">
+            <div className = "user-chat-info">
               {/* <span>Jane</span> */}
               <span>{user.displayName}</span>
             </div>
