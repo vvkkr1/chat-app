@@ -1,6 +1,29 @@
-import React from 'react'
+import { doc, onSnapshot } from 'firebase/firestore';
+import React,{useContext, useEffect, useState} from 'react'
+import { db } from '../firebase/firebase';
+import { AuthContext } from '../context/AuthContext';
 
 const Chats = () => {
+
+  const[chats, setChats] = useState([]);
+
+  const currUser = useContext(AuthContext);
+  
+  useEffect(()=>{
+    const getChats = async () => { 
+      const unsub = onSnapshot(doc(db, "userChats", currUser.uid), (doc) => {
+        setChats(doc.data())
+        console.log("Current data:", doc.data());
+      })
+      return () => {
+        unsub();
+      }
+    }
+    currUser.uid && getChats()
+  },[currUser.uid]);
+
+  console.log("_____________",chats);
+
   return (
     <div className='chats'>
        <div className='chats-container'>

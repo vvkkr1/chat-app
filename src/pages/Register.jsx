@@ -71,7 +71,7 @@ function Register(){
                       email,
                       photoURL:downloadURL
                     })
-                    // await setDoc(doc(db,"userChats",user.id),{});
+                    await setDoc(doc(db,"userChats",user.uid),{});
                     navigate("/");
                   });
                 }
